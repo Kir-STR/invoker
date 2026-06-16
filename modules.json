@@ -1,0 +1,74 @@
+{
+  "operator-gate": {
+    "title": "Operator gate",
+    "group": "base-discipline",
+    "default": true,
+    "files": ["rules/operator-gate.md"],
+    "depends_on": [],
+    "note": "Подтверждение деструктивных/наружу-направленных действий."
+  },
+  "retro-loop": {
+    "title": "Retro loop",
+    "group": "base-discipline",
+    "default": true,
+    "files": ["rules/retro-loop.md"],
+    "depends_on": [],
+    "note": "Движок эволюции правил (identity feature)."
+  },
+  "worktree-workflow": {
+    "title": "Worktree workflow",
+    "group": "git-pr-workflow",
+    "default": false,
+    "files": ["rules/worktree-workflow.md"],
+    "depends_on": [],
+    "note": "Изоляция работы в git worktrees."
+  },
+  "pr-policy": {
+    "title": "PR policy",
+    "group": "git-pr-workflow",
+    "default": false,
+    "files": ["rules/pr-policy.md"],
+    "depends_on": ["worktree-workflow"],
+    "note": "Политика веток и pull request'ов."
+  },
+  "review-loop": {
+    "title": "Review loop",
+    "group": "git-pr-workflow",
+    "default": false,
+    "files": ["rules/review-loop.md"],
+    "depends_on": ["pr-policy"],
+    "note": "Нужен CI review-бот."
+  },
+  "subagent-dispatch": {
+    "title": "Subagent dispatch",
+    "group": "subagent-workflow",
+    "default": false,
+    "files": ["rules/subagent-dispatch.md"],
+    "depends_on": [],
+    "note": "Subagent-driven стиль разработки."
+  },
+  "safety": {
+    "title": "Safety",
+    "group": "project-governance",
+    "default": false,
+    "files": ["rules/safety.md"],
+    "depends_on": [],
+    "note": "Скелет для safety-критичных проектов (kill-switch / PII / consent)."
+  },
+  "versioning": {
+    "title": "Versioning",
+    "group": "project-governance",
+    "default": false,
+    "files": ["rules/versioning.md"],
+    "depends_on": [],
+    "note": "Версионирование промптов и контрактов."
+  },
+  "glossary": {
+    "title": "Glossary",
+    "group": "project-governance",
+    "default": false,
+    "files": ["rules/glossary.md"],
+    "depends_on": [],
+    "note": "Канон терминов проекта."
+  }
+}
