@@ -89,10 +89,12 @@ README.md
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test skills/init/test/"
+    "test": "node --test \"skills/init/test/*.test.mjs\""
   }
 }
 ```
+
+> Примечание: на Windows + Node 21+ `node --test <каталог>/` ошибочно грузит каталог как модуль. Передаём quoted-glob `"…/*.test.mjs"` — Node раскрывает его сам, кросс-платформенно, и подхватывает только тест-файлы (не fixtures).
 
 - [ ] **Step 3: Проверить среду и валидность манифестов**
 
