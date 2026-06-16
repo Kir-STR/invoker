@@ -66,20 +66,21 @@ function cmdApply(flags) {
     created.push(map.out)
   }
 
-  // 3. Seed: пустой inbox всегда; retro-template если выбран retro-loop.
-  // Шаблон кладём в .claude/retro/template.md — НЕ матчит glob .claude/retro-*.md,
-  // по которому retro (План B) читает черновики, иначе retro проглотил бы свой же seed.
+  // 3. Seed в служебную зону .invoker/: пустой inbox всегда; retro-template если выбран retro-loop.
+  // Вся служебная инфра invoker живёт в .invoker/ (рядом со слепком modules.json), .claude/ —
+  // только под нативные Claude Code rules. Шаблон лежит в .invoker/retro-template.md (вне подпапки
+  // .invoker/retro/, куда retro (План B) пишет черновики), иначе retro проглотил бы свой же seed.
   writeFileEnsured(
-    join(target, 'ideas_4_rules.md'),
+    join(target, '.invoker', 'ideas_4_rules.md'),
     readFileSync(join(PLUGIN_ROOT, 'templates', 'seed', 'ideas_4_rules.md'), 'utf8'),
   )
-  created.push('ideas_4_rules.md')
+  created.push('.invoker/ideas_4_rules.md')
   if (resolved.includes('retro-loop')) {
     writeFileEnsured(
-      join(target, '.claude', 'retro', 'template.md'),
+      join(target, '.invoker', 'retro-template.md'),
       readFileSync(join(PLUGIN_ROOT, 'templates', 'seed', 'retro-template.md'), 'utf8'),
     )
-    created.push('.claude/retro/template.md')
+    created.push('.invoker/retro-template.md')
   }
 
   // 4. Слепок выбора
