@@ -7,7 +7,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
-const HELPER = join(ROOT, 'skills', 'init', 'helper.mjs')
+const HELPER = join(ROOT, 'skills', 'invoke', 'helper.mjs')
 
 test('resolve prints cascade for review-loop', () => {
   const out = execFileSync('node', [HELPER, 'resolve', '--modules', 'review-loop'], { encoding: 'utf8' })

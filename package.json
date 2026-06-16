@@ -4,6 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test \"skills/init/test/*.test.mjs\""
+    "test": "node --test \"skills/invoke/test/*.test.mjs\""
   }
 }

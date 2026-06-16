@@ -5,7 +5,7 @@
     "default": true,
     "files": ["rules/operator-gate.md"],
     "depends_on": [],
-    "note": "Подтверждение деструктивных/наружу-направленных действий."
+    "note": "Инструкции и процедуры подтверждения человеком перед необратимыми и рискованными действиями (удаление, push, отправка наружу)."
   },
   "retro-loop": {
     "title": "Retro loop",
@@ -13,7 +13,7 @@
     "default": true,
     "files": ["rules/retro-loop.md"],
     "depends_on": [],
-    "note": "Движок эволюции правил (identity feature)."
+    "note": "Процедура ретроспективы: накапливать наблюдения из работы и превращать их в улучшения правил проекта."
   },
   "worktree-workflow": {
     "title": "Worktree workflow",
@@ -21,7 +21,7 @@
     "default": false,
     "files": ["rules/worktree-workflow.md"],
     "depends_on": [],
-    "note": "Изоляция работы в git worktrees."
+    "note": "Правила работы в изолированных git worktree — по одной задаче на ветку, без смешения изменений."
   },
   "pr-policy": {
     "title": "PR policy",
@@ -29,7 +29,7 @@
     "default": false,
     "files": ["rules/pr-policy.md"],
     "depends_on": ["worktree-workflow"],
-    "note": "Политика веток и pull request'ов."
+    "note": "Правила работы с ветками и pull request'ами: как называть, когда открывать, как мёржить."
   },
   "review-loop": {
     "title": "Review loop",
@@ -37,7 +37,7 @@
     "default": false,
     "files": ["rules/review-loop.md"],
     "depends_on": ["pr-policy"],
-    "note": "Нужен CI review-бот."
+    "note": "Процедура ревью изменений автоматическим ревьюером перед слиянием (нужен CI-бот ревью)."
   },
   "subagent-dispatch": {
     "title": "Subagent dispatch",
@@ -45,7 +45,7 @@
     "default": false,
     "files": ["rules/subagent-dispatch.md"],
     "depends_on": [],
-    "note": "Subagent-driven стиль разработки."
+    "note": "Правила делегирования задач субагентам: когда дробить работу и как проверять результат."
   },
   "safety": {
     "title": "Safety",
@@ -53,7 +53,7 @@
     "default": false,
     "files": ["rules/safety.md"],
     "depends_on": [],
-    "note": "Скелет для safety-критичных проектов (kill-switch / PII / consent)."
+    "note": "Заготовка правил безопасности проекта — каркас, заполняется под проект вручную."
   },
   "versioning": {
     "title": "Versioning",
@@ -61,7 +61,7 @@
     "default": false,
     "files": ["rules/versioning.md"],
     "depends_on": [],
-    "note": "Версионирование промптов и контрактов."
+    "note": "Правила версионирования промптов и контрактов: когда поднимать версию и как фиксировать."
   },
   "glossary": {
     "title": "Glossary",
@@ -69,6 +69,6 @@
     "default": false,
     "files": ["rules/glossary.md"],
     "depends_on": [],
-    "note": "Канон терминов проекта."
+    "note": "Единый словарь терминов проекта и правила языка документации."
   }
 }

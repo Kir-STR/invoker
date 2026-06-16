@@ -22,7 +22,7 @@ Add the plugin in Claude Code, then run `/invoker:init` in your target project. 
 ### Development
 
 ```bash
-npm test   # node --test "skills/init/test/*.test.mjs"
+npm test   # node --test "skills/invoke/test/*.test.mjs"
 ```
 
 Pure Node ESM, no external dependencies. Design: `docs/specs/2026-06-15-invoker-design.md`. Plan: `docs/plans/2026-06-16-invoker-init.md`.
@@ -47,7 +47,7 @@ Claude Code plugin, привносящий в любой проект **дисц
 ### Разработка
 
 ```bash
-npm test   # node --test "skills/init/test/*.test.mjs"
+npm test   # node --test "skills/invoke/test/*.test.mjs"
 ```
 
 Чистый Node ESM, без внешних зависимостей. Дизайн: `docs/specs/2026-06-15-invoker-design.md`. План: `docs/plans/2026-06-16-invoker-init.md`.

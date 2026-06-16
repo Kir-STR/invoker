@@ -1,5 +1,5 @@
 ---
-globs: "{{GLOBS}}"
+globs: "**/*"
 class: discipline
 ---
 
