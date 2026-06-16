@@ -5,7 +5,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadRegistry, validateRegistry } from '../lib/registry.mjs'
 import { ENGINE_FILES } from '../lib/scaffold.mjs'
-import { listModuleBlockIds } from '../lib/blocks.mjs'
+import { listModuleBlockIds, filterModuleBlocks } from '../lib/blocks.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 const registry = validateRegistry(loadRegistry(join(ROOT, 'modules.json')))
@@ -26,5 +26,7 @@ test('each engine template declares exactly the registry module set', () => {
     const ids = listModuleBlockIds(readFileSync(tmplPath, 'utf8'))
     // нет блока на несуществующий модуль И каждый модуль реестра представлен
     assert.deepEqual(ids, registryIds, `${engine}: block ids must equal registry ids`)
+    // round-trip: бросит на незакрытом/вложенном блоке, чего listModuleBlockIds не ловит
+    assert.doesNotThrow(() => filterModuleBlocks(readFileSync(tmplPath, 'utf8'), [...registryIds]))
   }
 })

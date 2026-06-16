@@ -17,7 +17,11 @@ function parseFlags(argv) {
   const flags = {}
   for (let i = 0; i < argv.length; i++) {
     if (argv[i].startsWith('--')) {
-      flags[argv[i].slice(2)] = argv[i + 1]
+      const val = argv[i + 1]
+      if (val === undefined || val.startsWith('--')) {
+        throw new Error(`flag ${argv[i]} requires a value`)
+      }
+      flags[argv[i].slice(2)] = val
       i++
     }
   }
