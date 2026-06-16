@@ -1,5 +1,5 @@
 {
-  "og": { "title": "OG", "group": "base", "default": true, "files": ["rules/og.md"], "depends_on": [] },
-  "ww": { "title": "WW", "group": "git", "default": false, "files": ["rules/ww.md"], "depends_on": [] },
-  "pr": { "title": "PR", "group": "git", "default": false, "files": ["rules/pr.md"], "depends_on": ["ww"] }
+  "og": { "title": "OG", "group": "base", "default": true, "note": "og note", "files": ["rules/og.md"], "depends_on": [] },
+  "ww": { "title": "WW", "group": "git", "default": false, "note": "ww note", "files": ["rules/ww.md"], "depends_on": [] },
+  "pr": { "title": "PR", "group": "git", "default": false, "note": "pr note", "files": ["rules/pr.md"], "depends_on": ["ww"] }
 }

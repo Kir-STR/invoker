@@ -12,6 +12,15 @@ export function validateRegistry(registry) {
     if (!mod || typeof mod.title !== 'string' || mod.title.length === 0) {
       errors.push(`module ${id}: missing title`)
     }
+    if (typeof mod?.group !== 'string' || mod.group.length === 0) {
+      errors.push(`module ${id}: group must be a non-empty string`)
+    }
+    if (typeof mod?.default !== 'boolean') {
+      errors.push(`module ${id}: default must be a boolean`)
+    }
+    if (typeof mod?.note !== 'string' || mod.note.length === 0) {
+      errors.push(`module ${id}: note must be a non-empty string`)
+    }
     if (!Array.isArray(mod?.files)) {
       errors.push(`module ${id}: files must be an array`)
     }

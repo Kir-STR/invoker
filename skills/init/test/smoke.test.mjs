@@ -32,7 +32,8 @@ test('apply scaffolds recommended profile into a temp project', () => {
     assert.ok(existsSync(join(target, '.claude', 'rules', 'retro-loop.md')))
     assert.ok(!existsSync(join(target, '.claude', 'rules', 'worktree-workflow.md'))) // не выбран — не скопирован
     assert.ok(existsSync(join(target, 'ideas_4_rules.md')))
-    assert.ok(existsSync(join(target, '.claude', 'retro-template.md'))) // retro-loop выбран
+    assert.ok(existsSync(join(target, '.claude', 'retro', 'template.md'))) // retro-loop выбран
+    assert.ok(!existsSync(join(target, '.claude', 'retro-template.md'))) // не матчит glob retro-*.md
     assert.ok(existsSync(join(target, '.invoker', 'modules.json')))
 
     // Инструкц-файл: блоки невыбранных модулей вырезаны, маркеры сняты

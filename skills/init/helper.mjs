@@ -47,6 +47,11 @@ function cmdApply(flags) {
   const selected = list(flags.modules)
   const resolved = resolveDependencies(registry, selected)
 
+  // Валидируем движки ДО любых записей — плохой ввод не должен оставлять проект частично инициализированным.
+  for (const engine of engines) {
+    if (!ENGINE_FILES[engine]) throw new Error(`Unknown engine: ${engine}`)
+  }
+
   const created = []
 
   // 1. Правила (дословная копия)
@@ -56,13 +61,14 @@ function cmdApply(flags) {
   // 2. Инструкц-файлы под выбранные движки
   for (const engine of engines) {
     const map = ENGINE_FILES[engine]
-    if (!map) throw new Error(`Unknown engine: ${engine}`)
     const tmpl = readFileSync(join(PLUGIN_ROOT, 'templates', 'instructions', map.tmpl), 'utf8')
     writeFileEnsured(join(target, map.out), renderInstruction(tmpl, resolved))
     created.push(map.out)
   }
 
-  // 3. Seed: пустой inbox всегда; retro-template если выбран retro-loop
+  // 3. Seed: пустой inbox всегда; retro-template если выбран retro-loop.
+  // Шаблон кладём в .claude/retro/template.md — НЕ матчит glob .claude/retro-*.md,
+  // по которому retro (План B) читает черновики, иначе retro проглотил бы свой же seed.
   writeFileEnsured(
     join(target, 'ideas_4_rules.md'),
     readFileSync(join(PLUGIN_ROOT, 'templates', 'seed', 'ideas_4_rules.md'), 'utf8'),
@@ -70,10 +76,10 @@ function cmdApply(flags) {
   created.push('ideas_4_rules.md')
   if (resolved.includes('retro-loop')) {
     writeFileEnsured(
-      join(target, '.claude', 'retro-template.md'),
+      join(target, '.claude', 'retro', 'template.md'),
       readFileSync(join(PLUGIN_ROOT, 'templates', 'seed', 'retro-template.md'), 'utf8'),
     )
-    created.push('.claude/retro-template.md')
+    created.push('.claude/retro/template.md')
   }
 
   // 4. Слепок выбора

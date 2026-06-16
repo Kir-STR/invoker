@@ -8,12 +8,27 @@ import { resolveDependencies } from '../lib/resolve.mjs'
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
 const valid = {
-  'a': { title: 'A', group: 'g', default: true, files: ['rules/a.md'], depends_on: [] },
-  'b': { title: 'B', group: 'g', default: false, files: ['rules/b.md'], depends_on: ['a'] },
+  'a': { title: 'A', group: 'g', default: true, note: 'n', files: ['rules/a.md'], depends_on: [] },
+  'b': { title: 'B', group: 'g', default: false, note: 'n', files: ['rules/b.md'], depends_on: ['a'] },
 }
 
 test('validateRegistry returns registry when valid', () => {
   assert.equal(validateRegistry(valid), valid)
+})
+
+test('validateRegistry throws when group is missing', () => {
+  const bad = { 'a': { title: 'A', default: true, note: 'n', files: [], depends_on: [] } }
+  assert.throws(() => validateRegistry(bad), /group must be a non-empty string/)
+})
+
+test('validateRegistry throws when default is not a boolean', () => {
+  const bad = { 'a': { title: 'A', group: 'g', default: 'yes', note: 'n', files: [], depends_on: [] } }
+  assert.throws(() => validateRegistry(bad), /default must be a boolean/)
+})
+
+test('validateRegistry throws when note is missing', () => {
+  const bad = { 'a': { title: 'A', group: 'g', default: true, files: [], depends_on: [] } }
+  assert.throws(() => validateRegistry(bad), /note must be a non-empty string/)
 })
 
 test('validateRegistry throws on missing title', () => {
