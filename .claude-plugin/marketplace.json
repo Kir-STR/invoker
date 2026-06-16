@@ -1,0 +1,15 @@
+{
+  "name": "strela",
+  "owner": {
+    "name": "Kirill Bogdanov",
+    "email": "kirill.bogdanov@strela.digital"
+  },
+  "plugins": [
+    {
+      "name": "invoker",
+      "source": "./",
+      "description": "Дисциплинарный слой и движок эволюции правил для AI-агентов",
+      "author": { "name": "Kirill Bogdanov" }
+    }
+  ]
+}
