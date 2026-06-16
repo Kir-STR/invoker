@@ -12,11 +12,15 @@ export const ENGINE_FILES = {
 // побайтово — copyFileSync не декодирует/не перекодирует содержимое.
 export function copyRules(registry, resolved, srcDir, targetRulesDir) {
   mkdirSync(targetRulesDir, { recursive: true })
+  const written = []
   for (const id of resolved) {
     for (const rel of registry[id].files) {
-      copyFileSync(join(srcDir, rel), join(targetRulesDir, basename(rel)))
+      const name = basename(rel)
+      copyFileSync(join(srcDir, rel), join(targetRulesDir, name))
+      written.push(name)
     }
   }
+  return written
 }
 
 export function renderInstruction(templateText, resolved) {

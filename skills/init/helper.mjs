@@ -46,10 +46,8 @@ function cmdApply(flags) {
   const created = []
 
   // 1. Правила (дословная копия)
-  copyRules(registry, resolved, join(PLUGIN_ROOT, 'templates'), join(target, '.claude', 'rules'))
-  for (const id of resolved) for (const rel of registry[id].files) {
-    created.push(`.claude/rules/${rel.split('/').pop()}`)
-  }
+  const ruleFiles = copyRules(registry, resolved, join(PLUGIN_ROOT, 'templates'), join(target, '.claude', 'rules'))
+  for (const name of ruleFiles) created.push(`.claude/rules/${name}`)
 
   // 2. Инструкц-файлы под выбранные движки
   for (const engine of engines) {

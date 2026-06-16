@@ -26,7 +26,8 @@ test('copyRules copies module files byte-for-byte into target', () => {
     writeFileSync(join(src, 'rules', 'a.md'), bytes)
     const reg = { 'a': { title: 'A', files: ['rules/a.md'], depends_on: [] } }
 
-    copyRules(reg, ['a'], src, join(dst, '.claude', 'rules'))
+    const written = copyRules(reg, ['a'], src, join(dst, '.claude', 'rules'))
+    assert.deepEqual(written, ['a.md'])
 
     const copied = readFileSync(join(dst, '.claude', 'rules', 'a.md')) // Buffer, без encoding
     assert.ok(copied.equals(bytes)) // байт-в-байт, BOM и плейсхолдеры не тронуты
