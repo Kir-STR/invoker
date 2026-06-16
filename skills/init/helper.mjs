@@ -91,8 +91,8 @@ function cmdApply(flags) {
 }
 
 const [cmd, ...rest] = process.argv.slice(2)
-const flags = parseFlags(rest)
 try {
+  const flags = parseFlags(rest)
   if (cmd === 'resolve') cmdResolve(flags)
   else if (cmd === 'apply') cmdApply(flags)
   else throw new Error(`Unknown command: ${cmd ?? '(none)'}. Use 'resolve' or 'apply'.`)
