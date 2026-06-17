@@ -6,23 +6,27 @@
 
 ## English
 
-A Claude Code plugin that drops a **discipline layer + rule-evolution engine for AI agents** into any project — a portable distillation of a hard-won "agent OS".
+A Claude Code plugin that sets up rules and instruction files for AI agents in your project.
 
-`init` **copies vetted templates verbatim** (it never synthesizes rule text) and assembles instruction files by including/excluding marked `<!-- module:<id> -->` blocks. Questions are about plugin capabilities only, never your project's values — placeholders are left for you to fill.
+You pick the modules you want; invoker copies ready-made rule files into the project and builds the matching instruction files. It copies the templates as-is — it doesn't write rule text for you, and it doesn't ask about your project's details.
 
 ### Install & use
 
-Add the plugin in Claude Code, then run `/invoker:init` in your target project. Pick the modules and engines (CLAUDE/AGENTS/GEMINI); the scaffolder lays down `.claude/rules/`, instruction files, and a `.invoker/modules.json` snapshot.
+Add the plugin in Claude Code, then run `/invoker:invoke` in your project. Choose the modules and which engines you use (CLAUDE / AGENTS / GEMINI). invoker then creates:
 
-### Skills
+- `.claude/rules/` — rule files for the modules you picked;
+- instruction files in the project root (`CLAUDE.md`, plus `AGENTS.md` / `GEMINI.md` if selected);
+- `.invoker/` — a record of your choices (`modules.json`) and an ideas inbox.
 
-- **`ivk init`** (`/invoker:init`) — scaffolder: lays the selected substrate and modules into a project.
-- **`ivk retro`** (`/invoker:retro`) — rule-evolution engine *(planned — Plan B)*.
+### Commands
+
+- `/invoker:invoke` — set up rules and instructions in a project.
+- `/invoker:retro` — evolve the rules over time *(planned)*.
 
 ### Development
 
 ```bash
-npm test   # node --test "skills/invoke/test/*.test.mjs"
+npm test
 ```
 
 Pure Node ESM, no external dependencies. Design: `docs/specs/2026-06-15-invoker-design.md`. Plan: `docs/plans/2026-06-16-invoker-init.md`.
@@ -31,23 +35,27 @@ Pure Node ESM, no external dependencies. Design: `docs/specs/2026-06-15-invoker-
 
 ## Русский
 
-Claude Code plugin, привносящий в любой проект **дисциплинарный слой + движок эволюции правил для AI-агентов** — переносимую дистилляцию выстраданной «агентной ОС».
+Плагин для Claude Code, который разворачивает в проекте правила и файлы-инструкции для AI-агентов.
 
-`init` **копирует выверенные шаблоны дословно** (никогда не генерирует текст правил) и собирает инструкц-файлы включением/исключением размеченных блоков `<!-- module:<id> -->`. Вопросы — только про возможности плагина, не про значения проекта; плейсхолдеры оставляются оператору.
+Ты выбираешь нужные модули — invoker копирует готовые файлы правил в проект и собирает под них файлы-инструкции. Шаблоны копируются как есть: плагин не пишет за тебя текст правил и не спрашивает про детали твоего проекта.
 
 ### Установка и запуск
 
-Подключи плагин в Claude Code, затем в целевом проекте запусти `/invoker:init`. Выбери модули и движки (CLAUDE/AGENTS/GEMINI); скаффолдер разложит `.claude/rules/`, инструкц-файлы и слепок `.invoker/modules.json`.
+Подключи плагин в Claude Code и запусти `/invoker:invoke` в своём проекте. Выбери модули и движки, которыми пользуешься (CLAUDE / AGENTS / GEMINI). invoker создаст:
 
-### Скиллы
+- `.claude/rules/` — файлы правил для выбранных модулей;
+- файлы-инструкции в корне проекта (`CLAUDE.md`, а также `AGENTS.md` / `GEMINI.md`, если выбрал);
+- `.invoker/` — запись твоего выбора (`modules.json`) и инбокс для идей.
 
-- **`ivk init`** (`/invoker:init`) — скаффолдер: раскладывает выбранный субстрат и модули в проект.
-- **`ivk retro`** (`/invoker:retro`) — движок эволюции правил *(в разработке — План B)*.
+### Команды
+
+- `/invoker:invoke` — развернуть правила и инструкции в проекте.
+- `/invoker:retro` — развивать правила со временем *(в планах)*.
 
 ### Разработка
 
 ```bash
-npm test   # node --test "skills/invoke/test/*.test.mjs"
+npm test
 ```
 
 Чистый Node ESM, без внешних зависимостей. Дизайн: `docs/specs/2026-06-15-invoker-design.md`. План: `docs/plans/2026-06-16-invoker-init.md`.

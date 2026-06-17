@@ -30,6 +30,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **`SKILL.md` зовёт helper через `${CLAUDE_PLUGIN_ROOT}`** (переменная Claude Code, подставляется в содержимое скилла): при запуске cwd — целевой проект, а не каталог плагина, поэтому относительный путь до `helper.mjs` не разрешится.
 
+**Что эмитит `apply`.** В целевой проект: дословные копии правил → `.claude/rules/<id>.md`; инструкц-файлы выбранных движков → в корень (`CLAUDE.md` всегда, `apply` форсит `claude` первым); служебка → `.invoker/` (`ideas_4_rules.md` всегда; `retro-template.md` — только если выбран `retro-loop`) + слепок `.invoker/modules.json`. Валидация движков идёт до любых записей — частично инициализированный проект исключён.
+
 ## Синхронизация при добавлении/изменении модуля
 
 Целостность охраняет инвариант-тест `skills/invoke/test/consistency.test.mjs`: множество блоков `<!-- module:<id> -->` в **каждом** из 3 шаблонов == множество id в `modules.json` == файлы `files` существуют под `templates/`. Добавляя модуль, синхронно правь: `modules.json` + `templates/rules/<id>.md` + блок во **всех трёх** инструкц-шаблонах — иначе тест падает.
