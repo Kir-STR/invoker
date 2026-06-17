@@ -12,7 +12,7 @@ class: discipline
 - `#N` в тексте PR/коммитов — только проверенные ссылки. Никогда не использовать `#N` для эфемерных / backlog-ID в title/body PR и subject коммитов — платформа может рендерить `#N` backreference на чужие закрытые PR/issue.
 - Один PR = одна цель.
 - Ветки от `main`, merge только через PR.
-- Merge через `{{PR_TOOL}}` с опцией `--rebase` (если не настроено иначе). Не использовать `--squash` или merge-commit без явного согласования.
+- Merge через `gh` с опцией `--rebase` (если не настроено иначе). Не использовать `--squash` или merge-commit без явного согласования.
 - Merge разрешён только при: все CI-проверки зелёные; оператор явно сказал «мержь».
 
 ## Simplify pass перед PR
@@ -28,8 +28,8 @@ class: discipline
 ## Бюджет PR
 
 **По умолчанию:**
-- target: до `{{PR_TARGET_LINES}}` reviewable lines
-- hard cap: `{{PR_HARD_CAP_LINES}}` reviewable lines **и** `{{PR_HARD_CAP_FILES}}` reviewable files
+- target: до `400` reviewable lines
+- hard cap: `800` reviewable lines **и** `15` reviewable files
 - один PR = одна цель
 
 **Reviewable diff** считается без lock-файлов, сгенерированных файлов и артефактов сборки.
@@ -44,7 +44,7 @@ class: discipline
 
 ## Review loop
 
-**Базовое правило:** ничего не править автономно по review-комментам `{{REVIEW_BOT}}`. Любая правка после review требует явного подтверждения оператора. Никаких авто-итераций push → review → fix → push. После разбора findings — показывать оператору каждый finding с предлагаемой реакцией:
+**Базовое правило:** ничего не править автономно по review-комментам `review-bot` (обобщённое имя автоматического ревьюера — замени на свой: Gemini Code Assist, Copilot, Claude review и т.п.). Любая правка после review требует явного подтверждения оператора. Никаких авто-итераций push → review → fix → push. После разбора findings — показывать оператору каждый finding с предлагаемой реакцией:
 - **Срочно править сейчас**
 - **В backlog** — записать finding в backlog под target-секцию
 - **Отвергнуть** — с обоснованием через комментарий к PR
