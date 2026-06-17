@@ -36,6 +36,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Целостность охраняет инвариант-тест `skills/invoke/test/consistency.test.mjs`: множество блоков `<!-- module:<id> -->` в **каждом** из 3 шаблонов == множество id в `modules.json` == файлы `files` существуют под `templates/`. Добавляя модуль, синхронно правь: `modules.json` + `templates/rules/<id>.md` + блок во **всех трёх** инструкц-шаблонах — иначе тест падает.
 
+**Тест не охраняет** ещё две вещи — их правь руками: (1) чеклист групп в `skills/invoke/SKILL.md` (перечисление модулей по группам, отметка recommended); (2) **версию в `.claude-plugin/plugin.json`** — поднимать на каждый функциональный релиз. Авто-обновление плагина в Claude Code резолвит по строке `version`, не по коммиту: без bump'а маркетплейс с `autoUpdate: true` подтянется, а установленный плагин останется на старом коммите.
+
 ## Конвенции
 
 - `modules.json` — строгий JSON (без комментариев/висячих запятых): его читает `JSON.parse`.
