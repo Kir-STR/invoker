@@ -1,14 +1,16 @@
 # invoker
 
+*Agent rules for your project — installed in one run, refined over time.*
+
 *[English](#english) · [Русский](#русский)*
 
 ---
 
 ## English
 
-A Claude Code plugin that sets up rules and instruction files for AI agents in your project.
+invoker drops ready-made behavior rules for AI agents into your project — how agents work with git and PRs, how they run subagents, what they don't do without asking. You pick the modules you need; invoker copies vetted templates into `.claude/rules/` and builds the matching instruction files (`CLAUDE.md` / `AGENTS.md` / `GEMINI.md`). It doesn't write rule text for you and doesn't ask about your project's details.
 
-You pick the modules you want; invoker copies ready-made rule files into the project and builds the matching instruction files. It copies the templates as-is — it doesn't write rule text for you, and it doesn't ask about your project's details.
+It's not one-off scaffolding. Over time invoker notices which situations keep recurring in your sessions and suggests new rules to add — so the rule set grows with the project instead of going stale. *(This rule-evolution engine — `retro` — is in the works.)*
 
 ### Install & use
 
@@ -20,8 +22,8 @@ Add the plugin in Claude Code, then run `/invoker:invoke` in your project. Choos
 
 ### Commands
 
-- `/invoker:invoke` — set up rules and instructions in a project.
-- `/invoker:retro` — evolve the rules over time *(planned)*.
+- `/invoker:invoke` — install rules and instructions in a project.
+- `/invoker:retro` — refine the rules over time from your real sessions *(in the works)*.
 
 ### Development
 
@@ -35,9 +37,9 @@ Pure Node ESM, no external dependencies. Design: `docs/specs/2026-06-15-invoker-
 
 ## Русский
 
-Плагин для Claude Code, который разворачивает в проекте правила и файлы-инструкции для AI-агентов.
+invoker раскладывает в проект готовые правила поведения для AI-агентов — как агенты работают с git и PR, как запускают субагентов, чего не делают без спроса. Выбираешь нужные модули — плагин копирует выверенные шаблоны в `.claude/rules/` и собирает под них файлы-инструкции (`CLAUDE.md` / `AGENTS.md` / `GEMINI.md`). Текст правил он не сочиняет и про детали твоего проекта не спрашивает.
 
-Ты выбираешь нужные модули — invoker копирует готовые файлы правил в проект и собирает под них файлы-инструкции. Шаблоны копируются как есть: плагин не пишет за тебя текст правил и не спрашивает про детали твоего проекта.
+Это не разовый скаффолдинг. Со временем invoker подмечает, какие ситуации повторяются в твоих сессиях, и предлагает новые правила — так набор растёт вместе с проектом, а не устаревает. *(Этот движок эволюции правил — `retro` — в разработке.)*
 
 ### Установка и запуск
 
@@ -50,7 +52,7 @@ Pure Node ESM, no external dependencies. Design: `docs/specs/2026-06-15-invoker-
 ### Команды
 
 - `/invoker:invoke` — развернуть правила и инструкции в проекте.
-- `/invoker:retro` — развивать правила со временем *(в планах)*.
+- `/invoker:retro` — со временем дополнять правила на основе твоих реальных сессий *(в разработке)*.
 
 ### Разработка
 
