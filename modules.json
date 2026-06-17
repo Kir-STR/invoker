@@ -15,6 +15,14 @@
     "depends_on": [],
     "note": "Процедура ретроспективы: накапливать наблюдения из работы и превращать их в улучшения правил проекта."
   },
+  "secret-hygiene": {
+    "title": "Secret hygiene",
+    "group": "base-discipline",
+    "default": true,
+    "files": ["rules/secret-hygiene.md"],
+    "depends_on": [],
+    "note": "Не выводить секреты целиком: не дампить окружение, запрашивать переменные точечно, маскировать значения в выводе, логах и телах PR/комментариев."
+  },
   "worktree-workflow": {
     "title": "Worktree workflow",
     "group": "git-pr-workflow",
@@ -54,6 +62,14 @@
     "files": ["rules/safety.md"],
     "depends_on": [],
     "note": "Заготовка правил безопасности проекта — каркас, заполняется под проект вручную."
+  },
+  "architectural-invariants": {
+    "title": "Architectural invariants",
+    "group": "project-governance",
+    "default": false,
+    "files": ["rules/architectural-invariants.md"],
+    "depends_on": [],
+    "note": "Заготовка архитектурных инвариантов — каркас (границы слоёв, изоляция адаптеров, shared без бизнес-логики), заполняется под проект вручную."
   },
   "versioning": {
     "title": "Versioning",
