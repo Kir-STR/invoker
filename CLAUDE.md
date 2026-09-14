@@ -4,19 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Команды
 
-- `npm test` — весь набор (`node --test "skills/invoke/test/*.test.mjs"`).
-- Один файл тестов: `node --test skills/invoke/test/<name>.test.mjs`.
+- `npm test` — весь набор (`node --test "skills/*/test/*.test.mjs"` — покрывает `invoke` и `retro`).
+- Один файл тестов: `node --test skills/<skill>/test/<name>.test.mjs`.
 - Прогон CLI вручную: `node skills/invoke/helper.mjs resolve --modules <a,b>` (dry-run, печатает план) или `... apply --target <dir> --engines claude[,agents,gemini] --modules <a,b>`.
 
 Сборки/линтера нет: чистый Node ESM (`.mjs`), без внешних зависимостей, тест-раннер — встроенный `node:test`. На Windows `node --test <каталог>/` ошибочно грузит каталог как модуль — поэтому скрипт использует quoted-glob.
 
 ## Что это
 
-`invoker` — Claude Code plugin: дисциплинарный слой + движок эволюции правил для AI-агентов, дистиллируемый из боевого проекта **eve** (`C:\Users\T590\!work\1.Projects\client\eve`) и универсализируемый. Дизайн — `docs/specs/2026-06-15-invoker-design.md`; план реализации — `docs/plans/2026-06-16-invoker-init.md`. Реализован скилл `invoke` (План A); `retro` — План B, ещё не написан.
+`invoker` — Claude Code plugin: небольшой переносимый **agent-OS** — качественная универсальная основа для работы с AI-агентами в любом проекте. Шесть слоёв: `CLAUDE.md` (оператор) / `AGENTS.md` (советник) / `GEMINI.md` (ревьюер) / `.claude/rules/` (autoload-правила) / runbook (read-on-demand, планируется) / skills (универсальные процедуры, живут в плагине, вызываются по имени). Слои 1–5 scaffold'ятся в проект; skills — нет. Дистиллируется из боевого проекта **eve** (`C:\Users\T590\!work\1.Projects\client\eve`) и универсализируется. Дизайн — `docs/specs/2026-06-15-invoker-design.md`; план реализации — `docs/plans/2026-06-16-invoker-init.md`. Реализованы скиллы `invoke` (скаффолдер слоёв 1–5) и `retro` (NL-движок эволюции правил, `skills/retro/SKILL.md`) + plugin-команда `save` (`commands/save.md`, тонкий триггер над памятью CC).
 
 ## Архитектура
 
-Плагин = **скиллы** (активная логика, `skills/`) + **статика** (`templates/`) + **control plane** (`modules.json` в корне).
+Плагин = **скиллы** (активная логика, `skills/`) + **команды** (тонкие триггеры, `commands/`) + **статика** (`templates/`) + **control plane** (`modules.json` в корне). Скиллы и команды автодискаверятся Claude Code из своих каталогов — в `plugin.json` не перечисляются.
 
 **Поток `invoke` — гибрид NL + детерминизм.** `skills/invoke/SKILL.md` — тонкий оркестратор (NL): задаёт capability-вопросы, gated-подтверждения, отчёт. Вся механика — в Node-ядре `skills/invoke/lib/`, конвейер: `registry` (load + validate) → `resolve` (топосортировка `depends_on`, детект циклов/битых ссылок) → `blocks` (вырезание блоков) → `scaffold` (копирование/рендер/слепок). `helper.mjs` — тонкий CLI над ядром (`resolve`/`apply`).
 
